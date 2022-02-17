@@ -1,41 +1,64 @@
 class Car {
     constructor() {
-        // Базовая стоимость
-        this.cost = function() {
-            return 20000;
-        }
+        this.price = 10000;
+        this.model = 'Car'
     }
-}
-// Функция-декоратор
-function carWithAC(car) {
-    car.hasAC = true;
-    const prevCost = car.cost();
-    car.cost = function() {
-        return prevCost + 500;
+
+    getPrice() {
+        return this.price;
     }
-}
-// Функция-декоратор
-function carWithAutoTransmission(car) {
-    car.hasAutoTransmission = true;
-    const prevCost = car.cost();
-    car.cost = function() {
-        return prevCost + 2000;
-    }
-}
-// Функция-декоратор
-function carWithPowerLocks(car) {
-    car.hasPowerLocks = true;
-    const prevCost = car.cost();
-    car.cost = function() {
-        return prevCost + 500;
+
+    getDescription() {
+        return this.model
     }
 }
 
-const car = new Car();
-console.log(car.cost());
-carWithAC(car);
-carWithAutoTransmission(car);
-carWithPowerLocks(car);
+class Tesla extends Car {
+    constructor() {
+        super();
+        this.price = 25000;
+        this.model = 'Tesla';
+    }
+}
+
+class Autopilot {
+    constructor(car) {
+        this.car = car;
+    }
+
+    getPrice() {
+        return this.car.getPrice() + 5000;
+    }
+
+    getDescription() {
+        return `${this.car.getDescription()} with autopilot`;
+    }
+}
+
+class Parktronic {
+    constructor(car) {
+        this.car = car;
+    }
+
+    getPrice() {
+        return this.car.getPrice() + 3000;
+    }
+
+    getDescription() {
+        return `${this.car.getDescription()} with parktronic`;
+    }
+}
 
 
-console.log(car.cost());
+let tesla1 = new Tesla()
+
+tesla1 = new Autopilot(tesla1)
+tesla1 = new Parktronic(tesla1)
+
+console.log(tesla1.getPrice(), tesla1.getDescription())
+
+let tesla2 = new Tesla()
+
+tesla2 = new Autopilot(tesla2)
+
+console.log(tesla2.getPrice(), tesla2.getDescription())
