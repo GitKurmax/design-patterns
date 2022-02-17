@@ -29,4 +29,4 @@ careTaker.addMemento(creator.save("1"))
 careTaker.addMemento(creator.save("2"))
 careTaker.addMemento(creator.save("3"))
 
-console.log(creator.restore(careTaker.getMemento(1)))
+console.log(creator.restore(careTaker.getMemento(1)) )
